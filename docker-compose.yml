@@ -12,3 +12,33 @@ services:
       - ./data/northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
     ports:
       - 5432:5432
+
+  my_db:
+    image: mongo
+    container_name: mongo-container
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dharma
+      MONGO_INITDB_ROOT_PASSWORD: 4815162342
+    volumes: 
+      - ./dbmongo:/data/db
+    ports:
+      - 27017:27017
+
+  airflow:
+    image: puckel/docker-airflow:1.10.9
+    container_name: airflow-container
+    restart: always
+    depends_on:
+        - db
+        - my_db
+    environment:
+        - LOAD_EX=n
+        - EXECUTOR=Local
+    volumes:
+        - ./airflow/:/usr/local/airflow/
+        - ./data:/data
+        - ./airflow/requirements.txt:/requirements.txt
+    ports:
+        - "8080:8080"
+    command: scheduler
