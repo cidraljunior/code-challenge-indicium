@@ -11,27 +11,27 @@ default_args = {
    }
 
 with DAG(
-   'DAG',
+   'DAG-indicium',
    schedule_interval=timedelta(days=1),
    default_args=default_args
    ) as dag:
 
    t1 = BashOperator(
-   task_id='1_etl',
+   task_id='task1',
    bash_command="""
    cd $AIRFLOW_HOME/dags/tasks/
    python3 task1.py {{ execution_date }}
    """)
    
    t2 = BashOperator(
-   task_id='2_etl',
+   task_id='task2',
    bash_command="""
    cd $AIRFLOW_HOME/dags/tasks/
    python3 task2.py {{ execution_date }}
    """)
 
    t3 = BashOperator(
-   task_id='3_etl',
+   task_id='task3',
    bash_command="""
    cd $AIRFLOW_HOME/dags/tasks/
    python3 task3.py {{ execution_date }}

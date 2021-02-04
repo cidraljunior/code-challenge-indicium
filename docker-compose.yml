@@ -3,6 +3,7 @@ version: '3'
 services:
   db:
     image: postgres:12
+    container_name: postgres-container-indicium
     environment:
       POSTGRES_DB: northwind
       POSTGRES_USER: northwind_user
@@ -15,7 +16,7 @@ services:
 
   my_db:
     image: mongo
-    container_name: mongo-container
+    container_name: mongo-container-aluizio
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: dharma
@@ -30,15 +31,14 @@ services:
     container_name: airflow-container
     restart: always
     depends_on:
-        - db
-        - my_db
+      - db
+      - my_db
     environment:
-        - LOAD_EX=n
-        - EXECUTOR=Local
+      - LOAD_EX=n
     volumes:
-        - ./airflow/:/usr/local/airflow/
-        - ./data:/data
-        - ./airflow/requirements.txt:/requirements.txt
+      - ./airflow/:/usr/local/airflow/
+      - ./data:/data
+      - ./airflow/requirements.txt:/requirements.txt
     ports:
-        - "8080:8080"
+      - "8080:8080"
     command: scheduler

@@ -1,15 +1,13 @@
 import psycopg2
 import pandas as pd
 import os
-
 import sys
 
 date = sys.argv[1][:10]
 
 #PostgreSQL Connection
 
-host = "code-challenge_db_1"
-print(host)
+host = "postgres-container-indicium"
 database = "northwind"
 user = "northwind_user"
 password = "thewindisblowing"
