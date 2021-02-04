@@ -37,7 +37,7 @@ services:
       - ./data:/data
       - ./airflow/requirements.txt:/requirements.txt
       - ./airflow/airflow.cfg:/usr/local/airflow/airflow.cfg
-      #- ./airflow/airflow.db:/usr/local/airflow/airflow.db
+      - ./airflow/airflow.db:/usr/local/airflow/airflow.db
       - ./airflow/logs:/usr/local/airflow/logs
       - ./airflow/dags:/usr/local/airflow/dags
     ports:
