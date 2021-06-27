@@ -214,7 +214,7 @@ I used Docker to containerize  my solution. The source code can be set up using 
 With docker compose installed simply run:
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 ## Testing the Pipeline
 
@@ -232,13 +232,13 @@ Tasks available in DAG-indicium: task1, task2, task3.
 
 To run the pipeline in past days:
 ```
-airflow backfill DAG-indicium -s 2020-01-01 -e 2020-01-08
+airflow backfill DAG-indicium -s 2020-01-01 -e 2020-01-04
 ```
 The output files will be load at `/data` folder.
 
 ## Access Mongo Database
 
-To access the Mongo Database (and see the outputs of task3), in terminal:
+To access the Mongo Database (and see the outputs of task3), in a new terminal:
 ```
 mongo -u dharma -p 4815162342 --authenticationDatabase "admin"
 ```
